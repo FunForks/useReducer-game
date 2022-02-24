@@ -1,0 +1,37 @@
+body {
+  margin: 0;
+  font-family: sans-serif
+}
+
+div#board {
+  font-size: 36vmin;
+  height: auto;
+}
+
+
+#board div {
+  height: 30vmin;
+  width: 90vmin;
+}
+
+span {
+  display: inline-block;
+  width: 30vmin;
+  text-align: center;
+}
+
+#board span {
+  height: 30vmin;
+  border: 1px solid black;
+  box-sizing: border-box;
+  vertical-align: top;
+}
+
+span.hover {
+  background-color: #efe;
+  color: #9f9;
+}
+
+button {
+  width: 30vmin;
+}
