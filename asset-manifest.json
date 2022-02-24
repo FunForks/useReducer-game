@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/useReducer-game/static/css/main.02eda67c.css",
+    "main.js": "/useReducer-game/static/js/main.864e1d6d.js",
+    "index.html": "/useReducer-game/index.html",
+    "main.02eda67c.css.map": "/useReducer-game/static/css/main.02eda67c.css.map",
+    "main.864e1d6d.js.map": "/useReducer-game/static/js/main.864e1d6d.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.02eda67c.css",
+    "static/js/main.864e1d6d.js"
+  ]
+}
