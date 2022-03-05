@@ -9,6 +9,11 @@
  */
 
 
+
+// Use a function that will return a different memory location
+// for the array each time. If the same array is returned each
+// time, the Reset function would continue to show the current
+// state of play.
 const emptyBoard = () => [
   [0, 0, 0],
   [0, 0, 0],
@@ -20,7 +25,7 @@ const initialState = {
   play: emptyBoard(),
   move: 0,
   player: "X",
-  hover: {}, // may become { row: X, column: Y } with X, Y numbers
+  hover: {}, // may become { row: Y, column: X } with X, Y numbers
   outcome: ""
 }
 
@@ -31,8 +36,13 @@ const isWinner = (player, play) => {
   // Check if the winner has completed a row
   play.every(row => {
     winner = row.every( cell => cell === player)
+    // If a winner was found, stop the iterations of the `every`
+    // function. If not, continue looking for a winning row.
     return !winner
   })
+
+  // As soon as a winner is found, subsequent tests for the
+  // winner will be skipped.
 
   if (!winner) {
     // Check if winner has complete a column
@@ -63,12 +73,12 @@ const isWinner = (player, play) => {
 
 
 const playMove = (state, action) => {
-  state = {...state}
   const { row, column } = action.payload
   let { play, player, outcome, move } = state
 
   const cell = play[row][column]
   if (!outcome && !cell) {
+    state = {...state} // ensure that state changes
     move += 1
     play[row][column] = player
     const winner = isWinner(player, play)
@@ -96,7 +106,7 @@ const reducer = (state, action) => {
     case "RESET":
       return {
         ...initialState,   // ... does a shallow copy
-        play: emptyBoard() // so we need to reset play manually
+        play: emptyBoard()
       }
 
     case "ENTER":

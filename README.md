@@ -1,70 +1,40 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+See the game in action [here](https://dciforks.github.io/useReducer-game).
 
-## Available Scripts
+## Why use useReducer?
 
-In the project directory, you can run:
+useReducer is a powerful alternative to useState. It allows you to handle more than one state variable at a time, and to customize how they are updated.
 
-### `npm start`
+There are four major reasons for using useReducer:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+1. **The next state of your app depends on the current state.** This is clearly true of a game, where each person's move determines what moves are possible for the opponent.
+2. **The state of your app is complex.** In Noughts and Crosses, you have a 2D array of squares, and lines, columns and diagonals all have their importance.
+3. You want to keep business logic:
+   * as **a pure function**
+   * **in a separate module**
+   When your project is small, it might seem convenient to have all your code in one file. But as your project increases in size, it makes sense to put each chunk of functionality in a different file. This allows different people to work on different features of the project, with no merge conflicts.
+4. **You want to test the logic easily.** Because the reducer is a pure function in a separate file, it is easy to write tests that can check that all state changes are handled correctly.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## A metaphor for useReducer
 
-### `npm test`
+To understand why it's useful, imagine the way a restaurant functions.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+The diners sit in one part of the restaurant, and the chefs are busy in a different place. The serving staff carry messages from the diners to the kitchen, and dishes from the kitchen to the diners. This is known as "the separation of concerns". Each set of people perform a different task.
 
-### `npm run build`
+A meal may require a large number of different dishes to be prepared, and many exchanges may need to take place between the diners and the kitchen staff, even if they never see each other. Dishes are brought out and tidied away in a logical order. The state of the table depends on everything that happened there before.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+In a React app, you create components to display content on the user's screen. This is like the way food is presented on the table in front of the diners. You also need a "kitchen" to ensure that the right content is created for each user, and that the content is served in the right order. This is the role of the "reducer" function that you pass to React's `useReducer()` method.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+You may have heard of the [MVC (Model-View-Controller)](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller) design pattern. Your React components provide a View, where the user can see the content of the page. The event listeners that you attach to different elements give the user control: they can enter text, click on buttons, choose from selectors and so on. The Model is the data that can be displayed, and the patterns of interaction between the different parts of the data. Or, with the restaurant analogy, the Model is all the dishes that the kitchen can produce, the Controllers are the serving staff and the View is the spread of food on the diners' table.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Each time the "reducer" function receives messages from your React components, it calculates a new state for your app. (It prepares the appropriate dishes, or tidies away empty plates). This all happens in an abstract way in the reducer: nothing is shown on the screen yet.
 
-### `npm run eject`
+The black box that is React is in control of calling the "reducer" function. React therefore receives the value returned by the call. And React can then compare the current state with the new state. Wherever it finds a difference, it calls your component function so that it will re-render the changed parts of your app.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Tests
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Test Driven Development (TDD) is not covered in this course. However, you will find a simple test (App.test.js) which you can run by executing `npm test` in the Terminal.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+The tests check that a line of diagonal X's will set the outcome of the game to "Winner: X", and that a final move by O that does not create a line of three O's will result in an outcome of "Draw".
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+In a real TDD project, there would be many more tests. These would all be written before the reducer code itself was written, and successfully passing all the test would indicate that the game logic was functioning exactly as expected.

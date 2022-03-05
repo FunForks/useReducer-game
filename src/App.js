@@ -2,8 +2,8 @@
  * The App component is used:
  * + To display the current state of the game
  * + To dispatch actions to the reducer
- * 
- * All business logic is handled separately in the reducer
+ *
+ * All game logic is handled separately in the reducer
  */
 
 import { useReducer } from 'react'
@@ -15,7 +15,7 @@ const App = () => {
   const [ state, dispatch ] = useReducer(reducer, initialState)
 
 
-  // Converts an element to a position in the grid
+  // Convert an element to a position in the grid
   const getRowAndColumn = element => {
     const rowDiv = element.parentNode
     const row = [...rowDiv.parentNode.children].indexOf(rowDiv)
@@ -33,7 +33,7 @@ const App = () => {
 
     dispatch({
       type: "PLAY",
-      payload: cell 
+      payload: cell
     })
   }
 
@@ -43,7 +43,7 @@ const App = () => {
 
     dispatch({
       type: "ENTER",
-      payload: cell  
+      payload: cell
     })
   }
 
@@ -53,7 +53,7 @@ const App = () => {
 
     dispatch({
       type: "LEAVE",
-      payload: cell 
+      payload: cell
     })
   }
 
@@ -79,7 +79,7 @@ const App = () => {
         char = player
         className = "hover"
       }
-      
+
       return (
         <span
           key={key}
@@ -106,7 +106,7 @@ const App = () => {
   // A click on any cell in any row triggers playMove
   const board = ({ play, hover, player }) => {
     const rows = play.map((rowData, index) => {
-      const hoverColumn = ( hover.row === index ) 
+      const hoverColumn = ( hover.row === index )
                          ? hover.column
                          : undefined
 
@@ -121,9 +121,11 @@ const App = () => {
         {rows}
       </div>
     )
-  }    
+  }
 
 
+  // Display the board, the outcome (if appropriate) and a reset
+  // button
   return (
     <>
       {board(state)}
