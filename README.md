@@ -1,5 +1,5 @@
 
-See the game in action [here](https://dciforks.github.io/useReducer-game).
+See the game in action [here](https://funforks.github.io/useReducer-game).
 
 ## Why use useReducer?
 
