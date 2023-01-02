@@ -76,7 +76,7 @@ const App = () => {
     // the connection with App state. The complete game will
     // be rendered one more time, and then it will no longer
     // update
-    setMiniGames([sharedMini, ...miniGames])
+    setMiniGames([...miniGames, sharedMini])
   }
 
 
@@ -155,7 +155,7 @@ const App = () => {
       </button>
 
       <div id="mini-games">
-        {sharedMini}
+        {/* {sharedMini} */}
         {miniGames}
       </div>
     </>
