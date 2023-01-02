@@ -45,7 +45,7 @@ const isWinner = (player, play) => {
   // winner will be skipped.
 
   if (!winner) {
-    // Check if winner has complete a column
+    // Check if winner has completed a column
     play.every(( row, index ) => {
       winner = play.every( row => {
         return row[index] === player

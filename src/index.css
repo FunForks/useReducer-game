@@ -35,3 +35,34 @@ span.hover {
 button {
   width: 30vmin;
 }
+
+
+/* MINI-GAME */
+
+#mini-games {
+  position: absolute;
+  bottom: 0;
+  background-color: #ccc;
+  width: 90vmin;
+  display: flex;
+}
+
+
+div.mini {
+  font-size: 2vmin;
+  height: auto;
+}
+
+
+.mini div {
+  height: 2vmin;
+  width: 6vmin;
+}
+
+.mini span {
+  height: 2vmin;
+  width: 2vmin;
+  border: 0.3px solid black;
+  box-sizing: border-box;
+  vertical-align: top;
+}

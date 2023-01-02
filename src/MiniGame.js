@@ -9,64 +9,11 @@
 import { useReducer } from 'react'
 import { initialState, reducer } from './reducer'
 
-import MiniGame from './MiniGame'
 
 
-
-const App = () => {
-  const [ state, dispatch ] = useReducer(reducer, initialState)
-
-
-
-  // Convert an element to a position in the grid
-  const getRowAndColumn = element => {
-    const rowDiv = element.parentNode
-    const row = [...rowDiv.parentNode.children].indexOf(rowDiv)
-    const column = [...rowDiv.children].indexOf(element)
-
-    return { row, column }
-  }
-
-
-  // EVENT LISTENERS // EVENT LISTENERS // EVENT LISTENERS //
-
-
-  const playMove = (event) => {
-    const cell = getRowAndColumn(event.target)
-
-    dispatch({
-      type: "PLAY",
-      payload: cell
-    })
-  }
-
-
-  const enter = (event) => {
-    const cell = getRowAndColumn(event.target)
-
-    dispatch({
-      type: "ENTER",
-      payload: cell
-    })
-  }
-
-
-  const leave = (event) => {
-    const cell = getRowAndColumn(event.target)
-
-    dispatch({
-      type: "LEAVE",
-      payload: cell
-    })
-  }
-
-
-  const reset = () => {
-    dispatch({ type: "RESET" })
-  }
-
-
-  // RENDERING // RENDERING // RENDERING // RENDERING //
+const MiniGame = () => {
+  const [ state ] = useReducer(reducer, initialState)
+  
 
   // Create a row of 3 cells
   // Each cell has its own onMouseEnter and onMouseLeave listener
@@ -87,8 +34,6 @@ const App = () => {
         <span
           key={key}
           className={className}
-          onMouseEnter={enter}
-          onMouseLeave={leave}
         >
           {char}
         </span>
@@ -118,19 +63,12 @@ const App = () => {
 
     return (
       <div
-        id="board"
-        onClick={playMove}
+        class="mini"
       >
         {rows}
       </div>
     )
   }
-
-
-  const miniGames = [
-    <MiniGame />
-  ]
-
 
 
   // Display the board, the outcome (if appropriate) and a reset
@@ -139,18 +77,9 @@ const App = () => {
     <>
       {board(state)}
       <span>{state.outcome}</span>
-      <button
-        onClick={reset}
-      >
-        Reset
-      </button>
-
-      <div id="mini-games">
-        {miniGames}
-      </div>
     </>
   );
 }
 
 
-export default App;
+export default MiniGame;
