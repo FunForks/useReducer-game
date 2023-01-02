@@ -38,3 +38,9 @@ Test Driven Development (TDD) is not covered in this course. However, you will f
 The tests check that a line of diagonal X's will set the outcome of the game to "Winner: X", and that a final move by O that does not create a line of three O's will result in an outcome of "Draw".
 
 In a real TDD project, there would be many more tests. These would all be written before the reducer code itself was written, and successfully passing all the test would indicate that the game logic was functioning exactly as expected.
+
+## Challenge
+
+The online demo of the game shows a thumbnail of each completed game. The most recently completed game is added when you press Reset. Can you work out how this can be achieved?
+
+Hint: there is more than one branch in this repo. The other branches show some false routes, so that you can understand how React is (and is not) thinking. They also show working solutions. But perhaps you can work out a solution for yourself?
