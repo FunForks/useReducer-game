@@ -41,14 +41,16 @@ button {
 
 #mini-games {
   position: absolute;
+  display: flex;
+  justify-content: space-between;
   bottom: 0;
   background-color: #ccc;
   width: 90vmin;
-  display: flex;
 }
 
 
 div.mini {
+  width: 6vmin;
   font-size: 2vmin;
   height: auto;
 }
@@ -65,4 +67,16 @@ div.mini {
   border: 0.3px solid black;
   box-sizing: border-box;
   vertical-align: top;
+}
+
+.root {
+  background-color: #ffc;
+}
+
+.state {
+  background-color: #fdc;
+}
+
+.shared {
+  background-color: #cfc;
 }

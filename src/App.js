@@ -6,7 +6,7 @@
  * All game logic is handled separately in the reducer.
  */
 
-import { useReducer } from 'react'
+import { useReducer, useState } from 'react'
 import { initialState, reducer } from './reducer'
 
 import MiniGame from './MiniGame'
@@ -14,8 +14,30 @@ import MiniGame from './MiniGame'
 
 
 const App = () => {
+
   const [ state, dispatch ] = useReducer(reducer, initialState)
 
+
+  const miniGame = <MiniGame key="root" className="root"/>
+  const miniGames = [
+    miniGame
+  ] // shares state with App
+
+  const [ stateMini, setStateMini ] = useState(miniGame)
+  // does not share state with App
+
+  const [ moreMiniGames, setMiniGames ] = useState(
+    [ miniGame,
+      ...miniGames,
+      <MiniGame key="state" className="state"/>
+    ] // none share state with App
+  )
+
+  const sharedMini = <MiniGame
+    key="shared"
+    className="shared"
+    sharedState={state}
+  />
 
 
   // Convert an element to a position in the grid
@@ -127,11 +149,6 @@ const App = () => {
   }
 
 
-  const miniGames = [
-    <MiniGame />
-  ]
-
-
 
   // Display the board, the outcome (if appropriate) and a reset
   // button
@@ -147,6 +164,9 @@ const App = () => {
 
       <div id="mini-games">
         {miniGames}
+        {stateMini}
+        {moreMiniGames}
+        {sharedMini}
       </div>
     </>
   );

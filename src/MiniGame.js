@@ -11,8 +11,12 @@ import { initialState, reducer } from './reducer'
 
 
 
-const MiniGame = () => {
-  const [ state ] = useReducer(reducer, initialState)
+const MiniGame = ({ className, sharedState }) => {
+  let [ state ] = useReducer(reducer, initialState)
+  if (sharedState) {
+    state = sharedState
+  }
+
   
 
   // Create a row of 3 cells
@@ -63,7 +67,7 @@ const MiniGame = () => {
 
     return (
       <div
-        class="mini"
+        className={className + " mini"}
       >
         {rows}
       </div>
@@ -76,7 +80,6 @@ const MiniGame = () => {
   return (
     <>
       {board(state)}
-      <span>{state.outcome}</span>
     </>
   );
 }
