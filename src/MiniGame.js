@@ -11,6 +11,10 @@ import { initialState, reducer } from './reducer'
 
 
 
+let render = {} // used to track which game re-renders
+
+
+
 const MiniGame = ({ className, sharedState }) => {
   let [ state ] = useReducer(reducer, initialState)
   if (sharedState) {
@@ -18,6 +22,12 @@ const MiniGame = ({ className, sharedState }) => {
   }
 
   
+  // To help understand React, check when each MiniGame is rendered
+  const classRender = render[className] || (render[className] = 1)
+  const time = classRender === 1 ? "time" : "times"
+  console.log(`${className} rendered ${classRender} ${time}`);
+  render[className]++
+
 
   // Create a row of 3 cells
   // Each cell has its own onMouseEnter and onMouseLeave listener

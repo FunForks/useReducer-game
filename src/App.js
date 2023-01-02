@@ -17,25 +17,12 @@ const App = () => {
 
   const [ state, dispatch ] = useReducer(reducer, initialState)
 
-
-  const miniGame = <MiniGame key="root" className="root"/>
-  const miniGames = [
-    miniGame
-  ] // shares state with App
-
-  const [ stateMini, setStateMini ] = useState(miniGame)
-  // does not share state with App
-
-  const [ moreMiniGames, setMiniGames ] = useState(
-    [ miniGame,
-      ...miniGames,
-      <MiniGame key="state" className="state"/>
-    ] // none share state with App
-  )
-
+  // Start with an empty list of completed games
+  const [ miniGames, setMiniGames ] = useState([])
+  // Create a new game than shares the current state
   const sharedMini = <MiniGame
-    key="shared"
-    className="shared"
+    key={miniGames.length}
+    className={`game_${miniGames.length}`}
     sharedState={state}
   />
 
@@ -85,6 +72,11 @@ const App = () => {
 
   const reset = () => {
     dispatch({ type: "RESET" })
+    // Add the completed game to miniGames, which will break
+    // the connection with App state. The complete game will
+    // be rendered one more time, and then it will no longer
+    // update
+    setMiniGames([sharedMini, ...miniGames])
   }
 
 
@@ -163,10 +155,8 @@ const App = () => {
       </button>
 
       <div id="mini-games">
-        {miniGames}
-        {stateMini}
-        {moreMiniGames}
         {sharedMini}
+        {miniGames}
       </div>
     </>
   );

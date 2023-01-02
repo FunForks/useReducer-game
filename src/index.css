@@ -42,10 +42,11 @@ button {
 #mini-games {
   position: absolute;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   bottom: 0;
   background-color: #ccc;
   width: 90vmin;
+  height: 6vmin;
 }
 
 
@@ -53,6 +54,7 @@ div.mini {
   width: 6vmin;
   font-size: 2vmin;
   height: auto;
+  margin-left: 0.25vmin;
 }
 
 
@@ -64,19 +66,14 @@ div.mini {
 .mini span {
   height: 2vmin;
   width: 2vmin;
-  border: 0.3px solid black;
+  border: 0.2px solid black;
   box-sizing: border-box;
   vertical-align: top;
 }
 
-.root {
-  background-color: #ffc;
-}
 
-.state {
-  background-color: #fdc;
-}
-
-.shared {
-  background-color: #cfc;
+#mini-games > div:first-child {
+  position: absolute;
+  left: 0;
+  top: 0;
 }
