@@ -3,11 +3,13 @@
  * + To display the current state of the game
  * + To dispatch actions to the reducer
  *
- * All game logic is handled separately in the reducer
+ * All game logic is handled separately in the reducer.
  */
 
-import { useReducer } from 'react'
+import { useReducer, useEffect } from 'react'
 import { initialState, reducer } from './reducer'
+
+import { toggleWatcher } from './Watcher'
 
 
 
@@ -61,6 +63,16 @@ const App = () => {
   const reset = () => {
     dispatch({ type: "RESET" })
   }
+
+
+  // Start or stop the Watcher. toggleWatcher will be called
+  // automatically when this component is first rendered, and
+  // subsequently only if state.outcome gets set to "winner: A"
+  // or "".
+  useEffect(() => {
+    toggleWatcher(state.outcome || state.play)
+  }, [state.outcome])
+
 
 
   // RENDERING // RENDERING // RENDERING // RENDERING //
