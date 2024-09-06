@@ -37,7 +37,7 @@ Test Driven Development (TDD) is not covered in this course. However, you will f
 
 The tests check that a line of diagonal X's will set the outcome of the game to "Winner: X", and that a final move by O that does not create a line of three O's will result in an outcome of "Draw".
 
-In a real TDD project, there would be many more tests. These would all be written before the reducer code itself was written, and successfully passing all the test would indicate that the game logic was functioning exactly as expected.
+In a real TDD project, there would be many more tests. These would all be written before the reducer code itself was written, and successfully passing all the tests would indicate that the game logic was functioning exactly as expected.
 
 ## Challenge
 
